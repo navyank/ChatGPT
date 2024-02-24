@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat History</title>
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+    <style>
+        /* Add your CSS styles for the chat history here */
+        /* This is just an example */
+        .chat-history-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            position: relative; /* Add position relative */
+        }
+        .chat-history-container .backward {
+            position: absolute;
+            top: 10px;
+            right: 40px; /* Adjusted for the clear icon */
+            cursor: pointer;
+            color: #075e54; /* Set color to black */
+        }
+        .chat-history-container .clear {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #f00; /* Set color to red */
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        .user-message {
+            background-color: #dcf8c6;
+            text-align: right;
+        }
+        .bot-message {
+            background-color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-history-container">
+        <h2>Chat History</h2>
+        <!-- Backward icon for navigation -->
+        <a href="{% url 'response' %}" class="backward"><i class="fas fa-backward backward" ></i></a>
+        <!-- Clear icon to erase all history except last two -->
+        <a href="{% url 'clear' %}" class="history-icon"><i class="fas fa-trash clear"></i></a>
+        
+        <div class="chat-messages">
+            {% for entry in chat_history %}
+                <div class="chat-message {% if entry.0 == 'User' %} user-message {% else %} bot-message {% endif %}">
+                    <strong>{{ entry.0 }}:</strong> {{ entry.1 }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        // JavaScript function to navigate back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+
+        // JavaScript function to clear chat history except last two conversations
+  
+        </script>
+ </body>
+</html>

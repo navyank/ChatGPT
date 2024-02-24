@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Response</title>
+    <!-- Include Font Awesome CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-header {
+            background-color: #075e54;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+        }
+        .history-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            cursor: pointer;
+            color: #fff; /* Set color to white */
+        }
+        .chat-messages {
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+        .user-message {
+            background-color: #dcf8c6;
+            align-self: flex-end;
+        }
+        .bot-message {
+            background-color: #fff;
+            align-self: flex-start;
+        }
+        .message-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ccc;
+            outline: none;
+            border-color:green;
+        }
+        .message-input-container {
+            display: flex;
+        }
+        .send-button {
+            background-color: #075e54;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        .chat-messages {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">Chatbot Response
+            <a href="{% url 'history' %}" class="history-icon"><i class="fas fa-history"></i></a>
+            
+        </div>
+        <div class="chat-messages">
+            <div class="message user-message">
+                <strong>You:</strong> {{ user_input }}
+            </div>
+            <div class="message bot-message">
+                <strong>Chatbot:</strong> {{ response }}
+            </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <form id="message-form" method="post" action="{% url 'response' %}">
+                {% csrf_token %}
+                <div class="message-input-container">
+                    <input type="text" class="message-input" id="user_input" name="user_input" placeholder="Type a message...">
+                    <button type="submit" class="send-button" id="send-button">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
