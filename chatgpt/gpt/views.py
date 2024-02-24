@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 import openai
-openai.api_key="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"
+openai.api_key="sk-.....................65uL6"
 
 # def chat_with_gpt(prompt):
 #     response = openai.ChatCompletion.create(
